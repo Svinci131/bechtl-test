@@ -1,0 +1,23 @@
+'postgres://sid:asdf@host/
+///urllower    elif URIlower.startswith('postgres'):
+
+//from scripts 
+ERROR: importing CSV files is not supported for this database
+
+//your
+postgres _server_ process must have reading access to the directory
+you're storing the CSV files
+
+
+//database server of choice is able to
+import CSV files
+
+
+//try sqlite3 
+
+./imdbpy2sql.py -d /Users/samanthavinci/Documents/bechtl_test/dbs -u postgres://localhost:5432/testMovies  
+
+---move info into sql move that into psql 
+sqlite:/C|/full/path/to/database
+
+//http://imdbpy.sourceforge.net/downloads.html#source-code

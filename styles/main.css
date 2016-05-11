@@ -1,0 +1,90 @@
+body {
+    width: 1px;
+    min-width: 100%;
+    font-weight: 300;
+    letter-spacing: 0;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+ /*   color: #cfd2da;*/
+/*    background-color: #252830;*/
+}
+#wrap > .container {
+    padding: 60px 15px 0;
+}
+
+/*.page-header{
+	position: relative;
+    padding: 30px 15px;
+    
+    text-align: center;
+    color: rgba(255, 255, 255, .8);
+    background-image: url(http://www.indietips.com/wp-content/uploads/2015/10/movie-collage-TO-BEST-POSTER-ACTION-FREE-ONLINE-FULL-MOVIES-VIDEOS.jpg);
+    margin-bottom: 40px;
+    text-align: left;
+    font-size: 24px;
+}*/
+/*div {
+    display: block;
+}
+
+
+.bw {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.fu {
+    margin-left: -15px;
+    margin-right: -15px;
+}*/
+* {
+    box-sizing: border-box;
+}
+
+nav {
+	display: block;
+}
+
+.search_new {
+	margin-top: 6px;
+	width: 180px;
+}/*
+.aor {
+	position: relative;
+    margin-bottom: 30px;
+}
+.aor .fm {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 9px 10px;
+    color: #b7bcc8;
+    border: 0;
+    line-height: 0;
+}
+.rr:before, .rr:after, .dv dd:before, .dv dd:after, .fc .el:before, .fc .el:after, .bw:before, .bw:after, .ft:before, .ft:after, .fu:before, .fu:after, .ob:before, .ob:after, .oa > .nz:before, .oa > .nz:after, .nav:before, .nav:after, .ci:before, .ci:after, .oj:before, .oj:after, .ok:before, .ok:after, .oz:before, .oz:after, .qp:before, .qp:after, .ri:before, .ri:after, .rj:before, .rj:after {
+    content: " ";
+    display: table;
+}
+
+.fv, .fw, .fx, .fy, .fz, .ga, .gb, .gc, .gd, .ge, .gf, .gg, .gh, .gi, .gj, .gk, .gl, .gm, .gn, .go, .gp, .gq, .gr, .gs, .gt, .gu, .gv, .gw, .gx, .gy, .gz, .ha, .hb, .hc, .hd, .he, .hf, .hg, .hh, .hi, .hj, .hk, .hl, .hm, .hn, .ho, .hp, .hq {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+@media (min-width: 992px) {
+	.bw {
+    	width: 970px;
+	}
+}
+
+@media (min-width: 768px) {
+	.ge {
+    width: 25%;
+}
+}
+*/
