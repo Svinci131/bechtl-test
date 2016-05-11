@@ -1,20 +1,26 @@
-const http = require("http");
-const app = require("./app"); 
-const server = http.createServer();
-const model = require("./models");
-
-var Sequelize = require('sequelize');
-var db = new Sequelize('postgres://localhost:5432/testMovies');
+// const http = require("http");
+// const app = require("./app"); 
+// const server = http.createServer();
+var model = require("./models");
+var Kind = model.Kind; 
 
 
 
-server.on("request", require("./app"));
+console.log(Kind);
+// server.on("request", require("./app"));
 
-model.sync()
+// console.log(model.kid);
+
+Kind.sync()
 .then(function(data){
-	console.log(data);
-	server.listen("3000", function() {
-		console.log("listening on port 3000");
+	console.log("here", data);
+	// server.listen("3000", function() {
+	// 	console.log("listening on port 3000");
+	// });
+	Kind.findAll().then(function(data){
+		console.log("foo", data);
 	});
+}).catch(function(err){
+	console.log(err);
 });
 	

@@ -1,18 +1,35 @@
-var Sequelize = require('sequelize');
-var db = new Sequelize('postgres://localhost:5432/testMovies');
+var Sequelize = require ("Sequelize");
+var db = new Sequelize('postgres://localhost:5432/testMovies', {
+    dialect: 'postgres'
+});
 
-// var movies = db.define('movies',{
-// 	title: {type: Sequelize.STRING,
-// 			allowNull: false},
-// 	year: {type: Sequelize.INTEGER}
-// });
+var Kind = db.define("kind_type", {
+	id: {
+		type: Sequelize.INTEGER, 
+		primaryKey: true
+	}, 
+	kind: {
+		type: Sequelize.STRING
+	}
+	}, {
+		timestamps: false,
+		paranoid: true,
+		freezeTableName: true,
+		tableName: 'kind_type'
+	}); 
 
-//var actors = define
-
-//var roles = define
+Kind.sync().then (function(data){
+	console.log(data);
+	return Kind.findAll({
+		where: {id: 1}
+	});
+}).then(function(results){
+	console.log(results);
+});
 
 // module.exports = {
-// 	movies: movies, 
-	//actors: actors, 
-	// roles
+// 	Kind: Kind
 // };
+
+
+
