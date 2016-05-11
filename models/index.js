@@ -78,8 +78,8 @@ var Movie = db.define("title", {
 						var array = results.map(function(item){
 						return item.title+", "+item.production_year;
 						});
-
-						resolve(array);
+						if (array.length > 0) resolve(array);
+						else reject("no results found");
 					});
 				});
 			}
