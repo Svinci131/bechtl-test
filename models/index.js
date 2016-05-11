@@ -27,30 +27,44 @@ var Kind = db.define("kind_type", {
 	); 
 
 
-//var Movie = db.define("title", {
-// 	id: {
-// 		type: Sequelize.INTEGER, 
-// 		primaryKey: true
-// 	}, 
-// 	title: {
-// 		type: Sequelize.STRING
-// 	}, 
-// 	kind: {
-// 		type: Sequelize.INTEGER,
-// 	}, 
-// 	production_year: {
-// 		type: Sequelize.INTEGER,
-// 	}
-// 	}, {
-// 		timestamps: false,
-// 		paranoid: true,
-// 		freezeTableName: true,
-// 		tableName: 'kind_type'
-// 	}); 
+var Movie = db.define("title", {
+	id: {
+		type: Sequelize.INTEGER, 
+		primaryKey: true
+	}, 
+	title: {
+		type: Sequelize.STRING
+	}, 
+	kind_id: {
+		type: Sequelize.INTEGER,
+	}, 
+	production_year: {
+		type: Sequelize.INTEGER,
+		allowNull: true
+	}
+	}, {
+		timestamps: false,
+		paranoid: true,
+		freezeTableName: true,
+		underscored: true,
+		tableName: 'title', 
+		classMethods: {
+			narrowedSearch: function () {
+				return Movie.findAll(
+					{
+					attributes: ['title', 'id', 'production_year'],
+					where: {
+						kind_id: 1, 
+						id: {$lt: 10}
+					}
+				}); 
+			}
+		}
+	});
 
 module.exports = {
 	Kind: Kind, 
-	// Movie: Movie
+	Movie: Movie
 };
 
 
