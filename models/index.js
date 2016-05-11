@@ -58,6 +58,30 @@ var Movie = db.define("title", {
 						id: {$lt: 10}
 					}
 				}); 
+			},
+			searchResults: function (title) {
+				start = title.split(":")[0];
+				return Movie.findAll(
+					{
+					attributes: ['title', 'id', 'production_year'],
+					where: {
+						kind_id: 1, 
+						$or: [
+							{title: title}, 
+							{title: start}
+						]
+					}
+				})
+				.then(function(results){
+					return new Promise(function(resolve, reject) {
+						
+						var array = results.map(function(item){
+						return item.title+", "+item.production_year;
+						});
+
+						resolve(array);
+					});
+				});
 			}
 		}
 	});
