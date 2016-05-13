@@ -90,13 +90,14 @@ describe("sampleSearch", function() {
 		});
 	});
 
-	describe('roles', function () {
+	describe('person to roles to movies', function () {
 		//243892 and finds a list of the role ids and actor ids from that movie (we only have actress data, so golden)
 		it('it takes a person and finds all the roles they have been in "', function (done) {
 			var JulieAndrewsRoles = [];
 
 			CastInfo.findAll({
 				where: {
+						//julie andrews id
 						person_id: 33373
 				}
 			}).then(function(roles){
@@ -107,35 +108,51 @@ describe("sampleSearch", function() {
 					});
 
 				});
-			
-			}).then (function(arrayOfSearches){
+			})
+			.then (function(arrayOfSearches){
 				Promise.all(arrayOfSearches)
-				.then(function(arrayOfResults){
-					arrayOfResults.forEach(function(search){
-						console.log(search.title);
+				.then(function(arrayOfJAMovies){
+					arrayOfResults.forEach(function(jAMovie){
+						// console.log(jAMovie.title);
 					});
 				});
+				done();
 			}).catch(function(err){
 				console.log(err);
+				done();
 			});
 		});
 	});
-	// describe('roles', function () {
-	// 	//243892 and finds a list of the role ids and actor ids from that movie (we only have actress data, so golden)
-	// 	it('it takes a movie id"', function (done) {
-	// 		Role.findAll({
-	// 			where: {
-	// 					$and: [{name_pcode_nf: "J4536"}, {name: "Julie Andrews"}]
-
-	// 			}
-	// 		}).then(function(results){
-	// 			results.forEach(function(lady){
-	// 				// console.log(lady);
-	// 			});
-	// 			done();
-	// 		});
-	// 	});
-	// });
+	describe('roles', function () {
+		//243892 and finds a list of the role ids and actor ids from that movie (we only have actress data, so golden)
+		it('movie to roles to person"', function (done) {
+			CastInfo.findAll ({
+				where: { movie_id: 243892 }
+			})
+			.then(function(roles){
+				return roles.map(function(role) {
+					// console.log(role.person_id);
+					return  Actress.findOne ({
+						where: { id: role.person_id }
+					});
+					// console.log("female charecters in Mary Poppins:", char.)
+				});
+				
+			})
+			.then(function(arrayOfSearches){
+				Promise.all(arrayOfSearches)
+				.then(function(arrayOfActressIds){
+					arrayOfActressIds.forEach(function(actress){
+					console.log(actress.name);
+					});
+				});
+				done();
+			}).catch(function(err){
+				console.log(err);
+				done();
+			});
+		});
+	});
 
 });
 
