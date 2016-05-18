@@ -48,3 +48,7 @@ For PostgreSQL, you have to use the "createdb" command:
 To create the tables and to populate the database, you must run
 the imdbpy2sql.py script:
   # imdbpy2sql.py -d /dir/with/plainTextDataFiles/ -u 'URI'
+
+//from python scripts folder  
+
+imdbpy2sql.py -d /Users/samanthavinci/Documents/bechtl_test/dbs -u postgres://localhost:5432/movies

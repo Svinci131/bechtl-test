@@ -7,6 +7,7 @@ const CharName = require("../models").CharName;
 const CastInfo = require("../models").CastInfo;
 const expect = require('chai').expect;
 
+//user searches for movie
 describe('basic movie search', function () {
   xit('movies has class method that gets all movie titles', function (done) {
   	Movie.narrowedSearch()
@@ -55,27 +56,12 @@ describe('basic movie search', function () {
 	 	
 });
 
-// describe('actresses', function () {
-// 	it('it gets the name table info"', function (done) {
-// 		Actress.findAll({
-// 			where: {
-// 				$or: [{id: 33373}, 
-// 					  {id: 33374}]
-// 			}
-// 		}).then(function(results){
-// 			results.forEach(function(lady){
-// 				// console.log(lady.name, lady.surname_pcode);
-// 			});
-// 			done();
-// 		});
-// 	});
-// });
 
 describe("sampleSearch", function() {
 
 	describe("get movie id", function() {
 		//243892
-		xit('it finds the id for Mary Poppins"', function (done) {
+		it('it finds the id for Mary Poppins"', function (done) {
 			Movie.findAll({
 				where: {title: "Mary Poppins", 
 						kind_id: 1}
@@ -92,8 +78,8 @@ describe("sampleSearch", function() {
 
 	describe('person to roles to movies', function () {
 		//243892 and finds a list of the role ids and actor ids from that movie (we only have actress data, so golden)
-		it('it takes a person and finds all the roles they have been in "', function (done) {
-			var JulieAndrewsRoles = [];
+		it('it takes a person and finds all the movies they have been in "', function (done) {
+			var JulieAndrewsRoles;
 
 			CastInfo.findAll({
 				where: {
@@ -102,7 +88,6 @@ describe("sampleSearch", function() {
 				}
 			}).then(function(roles){
 				return roles.map(function(role){
-					//console.log(role.movie_id, role.id);
 					return  Movie.findOne ({
 						where: { id: role.movie_id }
 					});
@@ -110,40 +95,12 @@ describe("sampleSearch", function() {
 				});
 			})
 			.then (function(arrayOfSearches){
+
 				Promise.all(arrayOfSearches)
 				.then(function(arrayOfJAMovies){
-					arrayOfResults.forEach(function(jAMovie){
-						// console.log(jAMovie.title);
-					});
-				});
-				done();
-			}).catch(function(err){
-				console.log(err);
-				done();
-			});
-		});
-	});
-	describe('roles', function () {
-		//243892 and finds a list of the role ids and actor ids from that movie (we only have actress data, so golden)
-		it('movie to roles to person"', function (done) {
-			CastInfo.findAll ({
-				where: { movie_id: 243892 }
-			})
-			.then(function(roles){
-				return roles.map(function(role) {
-					// console.log(role.person_id);
-					return  Actress.findOne ({
-						where: { id: role.person_id }
-					});
-					// console.log("female charecters in Mary Poppins:", char.)
-				});
-				
-			})
-			.then(function(arrayOfSearches){
-				Promise.all(arrayOfSearches)
-				.then(function(arrayOfActressIds){
-					arrayOfActressIds.forEach(function(actress){
-					console.log(actress.name);
+					// console.log(arrayOfJAMovies);
+					arrayOfJAMovies.forEach(function(jAMovie){
+						//console.log("here", jAMovie.title);
 					});
 				});
 				done();
@@ -154,6 +111,70 @@ describe("sampleSearch", function() {
 		});
 	});
 
+
+
+	xdescribe('find all the actors in a movie', function () {
+		//243892 and finds a list of the role ids and actor ids from that movie (we only have actress data, so golden)
+		it('movie to roles to person"', function (done) {
+			var actressesByMovieId;
+			CastInfo.findAll ({
+				where: { movie_id: 243892 }
+			})
+			.then(function(roles){
+				return roles.map(function(role) {
+					console.log(role.person_id);
+					return  Actress.findOne ({
+						where: { id: role.person_id }
+					});
+					// console.log("female charecters in Mary Poppins:", char.)
+				});
+			})
+			.then(function(arrayOfSearches){
+				Promise.all(arrayOfSearches)
+				.then(function(arrayOfActressIds){
+					arrayOfActressIds.forEach(function(actress){
+					 console.log("actresses", actress.name, actress.id);
+					});
+				});
+				done();
+			}).catch(function(err){
+				console.log(err);
+				done();
+			});
+		});
+	});
+
+
+	describe('movie to role to CharName', function() {
+		it('movie to role to CharName', function (done) {
+			var actressesByMovieId;
+			CastInfo.findAll ({
+				//movie id 
+				where: { movie_id: 243892 }
+			})
+			.then(function(roles){
+				return roles.map(function(role) {
+					console.log("actress id:", role.person_id, "role id", role.id, "person_role_id", role.person_role_id);
+					return  CharName.findOne ({
+						where: { id: role.id}
+					});
+					// console.log("female charecters in Mary Poppins:", char.)
+				});
+			})
+			.then(function(arrayOfSearches){
+				Promise.all(arrayOfSearches)
+				.then(function(arrayOfRoleIds){
+					arrayOfRoleIds.forEach(function(character){
+					//console.log("characters", character.id, character.name);
+					});
+				});
+				done();
+			}).catch(function(err){
+				console.log(err);
+				done();
+			});
+		});
+	});
 });
 
 //roles
